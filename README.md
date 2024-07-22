@@ -22,3 +22,10 @@ docker compose up -d
   * Docs: https://hexdocs.pm/phoenix
   * Forum: https://elixirforum.com/c/phoenix-forum
   * Source: https://github.com/phoenixframework/phoenix
+
+## TOD0:
+ - Add imagelink to products
+ - add datecreated and date edited to most of the tables
+ - move account context into accounts context
+ - Add a way to login and logout
+ - Add address to products

@@ -7,6 +7,9 @@ defmodule PesapieWeb.Router do
 
   scope "/api", PesapieWeb do
     pipe_through :api
+
+    resources "/users", UserController, except: [:new, :edit]
+    resources "/categories", CategoryController, except: [:new, :edit]
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
