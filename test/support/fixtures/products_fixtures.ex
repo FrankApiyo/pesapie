@@ -75,4 +75,18 @@ defmodule Pesapie.ProductsFixtures do
 
     image_link
   end
+
+  @doc """
+  Generate a product_image.
+  """
+  def product_image_fixture(attrs \\ %{}) do
+    {:ok, product_image} =
+      attrs
+      |> Enum.into(%{
+
+      })
+      |> Pesapie.Products.create_product_image()
+
+    product_image
+  end
 end

@@ -297,4 +297,56 @@ defmodule Pesapie.ProductsTest do
       assert %Ecto.Changeset{} = Account.change_image_link(image_link)
     end
   end
+
+  describe "productimages" do
+    alias Pesapie.Products.ProductImage
+
+    import Pesapie.ProductsFixtures
+
+    @invalid_attrs %{}
+
+    test "list_productimages/0 returns all productimages" do
+      product_image = product_image_fixture()
+      assert Products.list_productimages() == [product_image]
+    end
+
+    test "get_product_image!/1 returns the product_image with given id" do
+      product_image = product_image_fixture()
+      assert Products.get_product_image!(product_image.id) == product_image
+    end
+
+    test "create_product_image/1 with valid data creates a product_image" do
+      valid_attrs = %{}
+
+      assert {:ok, %ProductImage{} = product_image} = Products.create_product_image(valid_attrs)
+    end
+
+    test "create_product_image/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Products.create_product_image(@invalid_attrs)
+    end
+
+    test "update_product_image/2 with valid data updates the product_image" do
+      product_image = product_image_fixture()
+      update_attrs = %{}
+
+      assert {:ok, %ProductImage{} = product_image} = Products.update_product_image(product_image, update_attrs)
+    end
+
+    test "update_product_image/2 with invalid data returns error changeset" do
+      product_image = product_image_fixture()
+      assert {:error, %Ecto.Changeset{}} = Products.update_product_image(product_image, @invalid_attrs)
+      assert product_image == Products.get_product_image!(product_image.id)
+    end
+
+    test "delete_product_image/1 deletes the product_image" do
+      product_image = product_image_fixture()
+      assert {:ok, %ProductImage{}} = Products.delete_product_image(product_image)
+      assert_raise Ecto.NoResultsError, fn -> Products.get_product_image!(product_image.id) end
+    end
+
+    test "change_product_image/1 returns a product_image changeset" do
+      product_image = product_image_fixture()
+      assert %Ecto.Changeset{} = Products.change_product_image(product_image)
+    end
+  end
 end
