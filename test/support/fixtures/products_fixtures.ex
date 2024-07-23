@@ -49,4 +49,30 @@ defmodule Pesapie.ProductsFixtures do
 
     review
   end
+
+  @doc """
+  Generate a review_image.
+  """
+  def review_image_fixture(attrs \\ %{}) do
+    {:ok, review_image} =
+      attrs
+      |> Enum.into(%{})
+      |> Pesapie.Products.create_review_image()
+
+    review_image
+  end
+
+  @doc """
+  Generate a image_link.
+  """
+  def image_link_fixture(attrs \\ %{}) do
+    {:ok, image_link} =
+      attrs
+      |> Enum.into(%{
+        linkURL: "some linkURL"
+      })
+      |> Pesapie.Account.create_image_link()
+
+    image_link
+  end
 end

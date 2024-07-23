@@ -75,7 +75,12 @@ defmodule Pesapie.ProductsTest do
     end
 
     test "create_product/1 with valid data creates a product" do
-      valid_attrs = %{description: "some description", name: "some name", price: 120.5, stockQuantity: 42}
+      valid_attrs = %{
+        description: "some description",
+        name: "some name",
+        price: 120.5,
+        stockQuantity: 42
+      }
 
       assert {:ok, %Product{} = product} = Products.create_product(valid_attrs)
       assert product.description == "some description"
@@ -90,7 +95,13 @@ defmodule Pesapie.ProductsTest do
 
     test "update_product/2 with valid data updates the product" do
       product = product_fixture()
-      update_attrs = %{description: "some updated description", name: "some updated name", price: 456.7, stockQuantity: 43}
+
+      update_attrs = %{
+        description: "some updated description",
+        name: "some updated name",
+        price: 456.7,
+        stockQuantity: 43
+      }
 
       assert {:ok, %Product{} = product} = Products.update_product(product, update_attrs)
       assert product.description == "some updated description"
@@ -170,6 +181,120 @@ defmodule Pesapie.ProductsTest do
     test "change_review/1 returns a review changeset" do
       review = review_fixture()
       assert %Ecto.Changeset{} = Products.change_review(review)
+    end
+  end
+
+  describe "reviewimages" do
+    alias Pesapie.Products.ReviewImage
+
+    import Pesapie.ProductsFixtures
+
+    @invalid_attrs %{}
+
+    test "list_reviewimages/0 returns all reviewimages" do
+      review_image = review_image_fixture()
+      assert Products.list_reviewimages() == [review_image]
+    end
+
+    test "get_review_image!/1 returns the review_image with given id" do
+      review_image = review_image_fixture()
+      assert Products.get_review_image!(review_image.id) == review_image
+    end
+
+    test "create_review_image/1 with valid data creates a review_image" do
+      valid_attrs = %{}
+
+      assert {:ok, %ReviewImage{} = review_image} = Products.create_review_image(valid_attrs)
+    end
+
+    test "create_review_image/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Products.create_review_image(@invalid_attrs)
+    end
+
+    test "update_review_image/2 with valid data updates the review_image" do
+      review_image = review_image_fixture()
+      update_attrs = %{}
+
+      assert {:ok, %ReviewImage{} = review_image} =
+               Products.update_review_image(review_image, update_attrs)
+    end
+
+    test "update_review_image/2 with invalid data returns error changeset" do
+      review_image = review_image_fixture()
+
+      assert {:error, %Ecto.Changeset{}} =
+               Products.update_review_image(review_image, @invalid_attrs)
+
+      assert review_image == Products.get_review_image!(review_image.id)
+    end
+
+    test "delete_review_image/1 deletes the review_image" do
+      review_image = review_image_fixture()
+      assert {:ok, %ReviewImage{}} = Products.delete_review_image(review_image)
+      assert_raise Ecto.NoResultsError, fn -> Products.get_review_image!(review_image.id) end
+    end
+
+    test "change_review_image/1 returns a review_image changeset" do
+      review_image = review_image_fixture()
+      assert %Ecto.Changeset{} = Products.change_review_image(review_image)
+    end
+  end
+
+  alias Pesapie.Account
+
+  describe "imagelinks" do
+    alias Pesapie.Account.ImageLink
+
+    import Pesapie.AccountFixtures
+
+    @invalid_attrs %{linkURL: nil}
+
+    test "list_imagelinks/0 returns all imagelinks" do
+      image_link = image_link_fixture()
+      assert Account.list_imagelinks() == [image_link]
+    end
+
+    test "get_image_link!/1 returns the image_link with given id" do
+      image_link = image_link_fixture()
+      assert Account.get_image_link!(image_link.id) == image_link
+    end
+
+    test "create_image_link/1 with valid data creates a image_link" do
+      valid_attrs = %{linkURL: "some linkURL"}
+
+      assert {:ok, %ImageLink{} = image_link} = Account.create_image_link(valid_attrs)
+      assert image_link.linkURL == "some linkURL"
+    end
+
+    test "create_image_link/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Account.create_image_link(@invalid_attrs)
+    end
+
+    test "update_image_link/2 with valid data updates the image_link" do
+      image_link = image_link_fixture()
+      update_attrs = %{linkURL: "some updated linkURL"}
+
+      assert {:ok, %ImageLink{} = image_link} =
+               Account.update_image_link(image_link, update_attrs)
+
+      assert image_link.linkURL == "some updated linkURL"
+    end
+
+    test "update_image_link/2 with invalid data returns error changeset" do
+      image_link = image_link_fixture()
+      assert {:error, %Ecto.Changeset{}} = Account.update_image_link(image_link, @invalid_attrs)
+      assert image_link == Account.get_image_link!(image_link.id)
+    end
+
+    test "delete_image_link/1 deletes the image_link" do
+      image_link = image_link_fixture()
+      assert {:ok, %ImageLink{}} = Account.delete_image_link(image_link)
+      assert_raise Ecto.NoResultsError, fn -> Account.get_image_link!(image_link.id) end
+    end
+
+    test "change_image_link/1 returns a image_link changeset" do
+      image_link = image_link_fixture()
+      assert %Ecto.Changeset{} = Account.change_image_link(image_link)
     end
   end
 end
