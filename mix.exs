@@ -44,7 +44,10 @@ defmodule Pesapie.MixProject do
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
-      {:bandit, "~> 1.5"}
+      {:bandit, "~> 1.5"},
+      {:absinthe, "~> 1.7.5"},
+      {:absinthe_plug, "~> 1.5.8"},
+      {:absinthe_phoenix, "~> 2.0.2"}
     ]
   end
 
