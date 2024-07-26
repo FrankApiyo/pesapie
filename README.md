@@ -24,5 +24,5 @@ docker compose up -d
   * Source: https://github.com/phoenixframework/phoenix
 
 ## TOD0:
- - add datecreated and date edited to most of the tables
+ - Checkout the tests and review code
  - Add a way to login and logout
