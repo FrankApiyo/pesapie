@@ -3,13 +3,16 @@ defmodule PesapieWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    # TODO: Add plug for current user here
   end
 
-  scope "/api", PesapieWeb do
+  scope "/" do
     pipe_through :api
 
-    resources "/users", UserController, except: [:new, :edit]
-    resources "/categories", CategoryController, except: [:new, :edit]
+    forward "/api", Absinthe.Plug, schema: PesapieWeb.Schema.Schema
+
+    forward "/graphiql", Absinthe.Plug.GraphiQL, schema: PesapieWeb.Schema.Schema
+    # socket: PesapieWeb.UserSocket
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
