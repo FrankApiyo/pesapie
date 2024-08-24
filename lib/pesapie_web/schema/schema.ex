@@ -1,12 +1,14 @@
 defmodule PesapieWeb.Schema.Schema do
   use Absinthe.Schema
+  import_types PesapieWeb.Schema.ProductTypes
 
   query do
-    @desc "Placeholder query"
-    field :placeholder, :string do
-      resolve(fn _parent, _args, _resolution ->
-        {:ok, "This is a placeholder response"}
-      end)
+
+    @desc "Get all products"
+    field :products, list_of(:product) do
+      resolve &PesapieWeb.Resolvers.Product.list_products/3
     end
+
   end
+
 end
