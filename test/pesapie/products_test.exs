@@ -243,7 +243,7 @@ defmodule Pesapie.ProductsTest do
   alias Pesapie.Account
 
   describe "imagelinks" do
-    alias Pesapie.Account.ImageLink
+    alias Pesapie.Product.ImageLink
 
     import Pesapie.AccountFixtures
 

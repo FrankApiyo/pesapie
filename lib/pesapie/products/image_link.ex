@@ -1,4 +1,4 @@
-defmodule Pesapie.Account.ImageLink do
+defmodule Pesapie.Product.ImageLink do
   use Ecto.Schema
   import Ecto.Changeset
 

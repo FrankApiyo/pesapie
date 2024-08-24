@@ -3,7 +3,7 @@ defmodule PesapieWeb.ImageLinkControllerTest do
 
   import Pesapie.AccountFixtures
 
-  alias Pesapie.Account.ImageLink
+  alias Pesapie.Product.ImageLink
 
   @create_attrs %{
     linkURL: "some linkURL"

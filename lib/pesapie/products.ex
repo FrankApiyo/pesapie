@@ -390,7 +390,7 @@ defmodule Pesapie.Products do
     ReviewImage.changeset(review_image, attrs)
   end
 
-  alias Pesapie.Account.ImageLink
+  alias Pesapie.Product.ImageLink
 
   @doc """
   Returns the list of imagelinks.
