@@ -12,7 +12,8 @@ defmodule PesapieWeb.ProductImageController do
   end
 
   def create(conn, %{"product_image" => product_image_params}) do
-    with {:ok, %ProductImage{} = product_image} <- Products.create_product_image(product_image_params) do
+    with {:ok, %ProductImage{} = product_image} <-
+           Products.create_product_image(product_image_params) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", ~p"/api/productimages/#{product_image}")
@@ -28,7 +29,8 @@ defmodule PesapieWeb.ProductImageController do
   def update(conn, %{"id" => id, "product_image" => product_image_params}) do
     product_image = Products.get_product_image!(id)
 
-    with {:ok, %ProductImage{} = product_image} <- Products.update_product_image(product_image, product_image_params) do
+    with {:ok, %ProductImage{} = product_image} <-
+           Products.update_product_image(product_image, product_image_params) do
       render(conn, :show, product_image: product_image)
     end
   end

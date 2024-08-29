@@ -28,7 +28,8 @@ defmodule PesapieWeb.ReviewImageController do
   def update(conn, %{"id" => id, "review_image" => review_image_params}) do
     review_image = Products.get_review_image!(id)
 
-    with {:ok, %ReviewImage{} = review_image} <- Products.update_review_image(review_image, review_image_params) do
+    with {:ok, %ReviewImage{} = review_image} <-
+           Products.update_review_image(review_image, review_image_params) do
       render(conn, :show, review_image: review_image)
     end
   end

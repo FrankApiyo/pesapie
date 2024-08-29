@@ -47,5 +47,6 @@ defmodule PesapieWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
+  plug CORSPlug, origin: ["http://loclahost:3000"]
   plug PesapieWeb.Router
 end

@@ -2,6 +2,7 @@ defmodule Pesapie.AccountsTest do
   use Pesapie.DataCase
 
   alias Pesapie.Accounts
+  alias Pesapie.Accounts.User
 
   describe "users" do
     alias Pesapie.Accounts.User

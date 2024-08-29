@@ -245,7 +245,8 @@ defmodule Pesapie.ProductsTest do
   describe "imagelinks" do
     alias Pesapie.Product.ImageLink
 
-    import Pesapie.AccountFixtures
+    import Pesapie.AccountsFixtures
+    import Pesapie.ProductsFixtures
 
     @invalid_attrs %{linkURL: nil}
 

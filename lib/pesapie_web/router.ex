@@ -3,7 +3,7 @@ defmodule PesapieWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
-    # TODO: Add plug for current user here
+    plug PesapieWeb.Plugs.SetCurrentUser
   end
 
   scope "/" do

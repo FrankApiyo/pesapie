@@ -28,7 +28,8 @@ defmodule PesapieWeb.ImageLinkController do
   def update(conn, %{"id" => id, "image_link" => image_link_params}) do
     image_link = Products.get_image_link!(id)
 
-    with {:ok, %ImageLink{} = image_link} <- Products.update_image_link(image_link, image_link_params) do
+    with {:ok, %ImageLink{} = image_link} <-
+           Products.update_image_link(image_link, image_link_params) do
       render(conn, :show, image_link: image_link)
     end
   end

@@ -1,7 +1,8 @@
 defmodule PesapieWeb.ImageLinkControllerTest do
   use PesapieWeb.ConnCase
 
-  import Pesapie.AccountFixtures
+  import Pesapie.AccountsFixtures
+  import Pesapie.ProductsFixtures
 
   alias Pesapie.Product.ImageLink
 

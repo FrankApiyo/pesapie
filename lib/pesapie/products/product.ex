@@ -10,6 +10,8 @@ defmodule Pesapie.Products.Product do
     field :categoryId, :id
     field :owner, :id
 
+    belongs_to :user, Pesapie.Accounts.User
+
     timestamps(type: :utc_datetime)
   end
 
