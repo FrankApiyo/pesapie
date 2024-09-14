@@ -197,4 +197,100 @@ defmodule Pesapie.Conversations do
   def change_message(%Message{} = message, attrs \\ %{}) do
     Message.changeset(message, attrs)
   end
+
+  alias Pesapie.Conversations.ConversationParticipant
+
+  @doc """
+  Returns the list of conversation_participants.
+
+  ## Examples
+
+      iex> list_conversation_participants()
+      [%ConversationParticipant{}, ...]
+
+  """
+  def list_conversation_participants do
+    Repo.all(ConversationParticipant)
+  end
+
+  @doc """
+  Gets a single conversation_participant.
+
+  Raises `Ecto.NoResultsError` if the Conversation participant does not exist.
+
+  ## Examples
+
+      iex> get_conversation_participant!(123)
+      %ConversationParticipant{}
+
+      iex> get_conversation_participant!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_conversation_participant!(id), do: Repo.get!(ConversationParticipant, id)
+
+  @doc """
+  Creates a conversation_participant.
+
+  ## Examples
+
+      iex> create_conversation_participant(%{field: value})
+      {:ok, %ConversationParticipant{}}
+
+      iex> create_conversation_participant(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_conversation_participant(attrs \\ %{}) do
+    %ConversationParticipant{}
+    |> ConversationParticipant.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a conversation_participant.
+
+  ## Examples
+
+      iex> update_conversation_participant(conversation_participant, %{field: new_value})
+      {:ok, %ConversationParticipant{}}
+
+      iex> update_conversation_participant(conversation_participant, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_conversation_participant(%ConversationParticipant{} = conversation_participant, attrs) do
+    conversation_participant
+    |> ConversationParticipant.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a conversation_participant.
+
+  ## Examples
+
+      iex> delete_conversation_participant(conversation_participant)
+      {:ok, %ConversationParticipant{}}
+
+      iex> delete_conversation_participant(conversation_participant)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_conversation_participant(%ConversationParticipant{} = conversation_participant) do
+    Repo.delete(conversation_participant)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking conversation_participant changes.
+
+  ## Examples
+
+      iex> change_conversation_participant(conversation_participant)
+      %Ecto.Changeset{data: %ConversationParticipant{}}
+
+  """
+  def change_conversation_participant(%ConversationParticipant{} = conversation_participant, attrs \\ %{}) do
+    ConversationParticipant.changeset(conversation_participant, attrs)
+  end
 end

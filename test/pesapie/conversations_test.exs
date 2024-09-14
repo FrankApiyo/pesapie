@@ -112,4 +112,58 @@ defmodule Pesapie.ConversationsTest do
       assert %Ecto.Changeset{} = Conversations.change_message(message)
     end
   end
+
+  describe "conversation_participants" do
+    alias Pesapie.Conversations.ConversationParticipant
+
+    import Pesapie.ConversationsFixtures
+
+    @invalid_attrs %{joined_at: nil}
+
+    test "list_conversation_participants/0 returns all conversation_participants" do
+      conversation_participant = conversation_participant_fixture()
+      assert Conversations.list_conversation_participants() == [conversation_participant]
+    end
+
+    test "get_conversation_participant!/1 returns the conversation_participant with given id" do
+      conversation_participant = conversation_participant_fixture()
+      assert Conversations.get_conversation_participant!(conversation_participant.id) == conversation_participant
+    end
+
+    test "create_conversation_participant/1 with valid data creates a conversation_participant" do
+      valid_attrs = %{joined_at: ~U[2024-09-13 14:42:00Z]}
+
+      assert {:ok, %ConversationParticipant{} = conversation_participant} = Conversations.create_conversation_participant(valid_attrs)
+      assert conversation_participant.joined_at == ~U[2024-09-13 14:42:00Z]
+    end
+
+    test "create_conversation_participant/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Conversations.create_conversation_participant(@invalid_attrs)
+    end
+
+    test "update_conversation_participant/2 with valid data updates the conversation_participant" do
+      conversation_participant = conversation_participant_fixture()
+      update_attrs = %{joined_at: ~U[2024-09-14 14:42:00Z]}
+
+      assert {:ok, %ConversationParticipant{} = conversation_participant} = Conversations.update_conversation_participant(conversation_participant, update_attrs)
+      assert conversation_participant.joined_at == ~U[2024-09-14 14:42:00Z]
+    end
+
+    test "update_conversation_participant/2 with invalid data returns error changeset" do
+      conversation_participant = conversation_participant_fixture()
+      assert {:error, %Ecto.Changeset{}} = Conversations.update_conversation_participant(conversation_participant, @invalid_attrs)
+      assert conversation_participant == Conversations.get_conversation_participant!(conversation_participant.id)
+    end
+
+    test "delete_conversation_participant/1 deletes the conversation_participant" do
+      conversation_participant = conversation_participant_fixture()
+      assert {:ok, %ConversationParticipant{}} = Conversations.delete_conversation_participant(conversation_participant)
+      assert_raise Ecto.NoResultsError, fn -> Conversations.get_conversation_participant!(conversation_participant.id) end
+    end
+
+    test "change_conversation_participant/1 returns a conversation_participant changeset" do
+      conversation_participant = conversation_participant_fixture()
+      assert %Ecto.Changeset{} = Conversations.change_conversation_participant(conversation_participant)
+    end
+  end
 end

@@ -32,4 +32,18 @@ defmodule Pesapie.ConversationsFixtures do
 
     message
   end
+
+  @doc """
+  Generate a conversation_participant.
+  """
+  def conversation_participant_fixture(attrs \\ %{}) do
+    {:ok, conversation_participant} =
+      attrs
+      |> Enum.into(%{
+        joined_at: ~U[2024-09-13 14:42:00Z]
+      })
+      |> Pesapie.Conversations.create_conversation_participant()
+
+    conversation_participant
+  end
 end
