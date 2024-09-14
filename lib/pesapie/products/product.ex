@@ -8,7 +8,6 @@ defmodule Pesapie.Products.Product do
     field :price, :float
     field :stockQuantity, :integer
     field :categoryId, :id
-    field :owner, :id
 
     belongs_to :user, Pesapie.Accounts.User
 

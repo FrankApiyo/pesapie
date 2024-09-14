@@ -18,4 +18,18 @@ defmodule Pesapie.ConversationsFixtures do
 
     conversation
   end
+
+  @doc """
+  Generate a message.
+  """
+  def message_fixture(attrs \\ %{}) do
+    {:ok, message} =
+      attrs
+      |> Enum.into(%{
+        message_text: "some message_text"
+      })
+      |> Pesapie.Conversations.create_message()
+
+    message
+  end
 end
