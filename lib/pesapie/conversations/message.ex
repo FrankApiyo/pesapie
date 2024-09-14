@@ -4,8 +4,8 @@ defmodule Pesapie.Conversations.Message do
 
   schema "messages" do
     field :message_text, :string
-    belongs_to(:sender, YourApp.Users.User)
-    belongs_to(:conversation, YourApp.Conversations.Conversation)
+    belongs_to(:sender, Pesapie.Users.User)
+    belongs_to(:conversation, Pesapie.Conversations.Conversation)
 
     timestamps(type: :utc_datetime)
   end
