@@ -71,7 +71,7 @@ defmodule Pesapie.ProductsFixtures do
       |> Enum.into(%{
         linkURL: "some linkURL"
       })
-      |> Pesapie.Account.create_image_link()
+      |> Pesapie.Products.create_image_link()
 
     image_link
   end
