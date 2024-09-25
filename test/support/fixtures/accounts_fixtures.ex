@@ -11,10 +11,10 @@ defmodule Pesapie.AccountsFixtures do
     {:ok, user} =
       attrs
       |> Enum.into(%{
-        email: "some email",
-        password: "some password",
-        phone: "some phone",
-        username: "some username"
+        email: "bob@hotmail.yahoo",
+        password: "somesecretpassword",
+        phone: "+254712345678",
+        username: "bob"
       })
       |> Pesapie.Accounts.create_user()
 

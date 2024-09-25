@@ -6,10 +6,10 @@ defmodule Pesapie.Accounts.User do
     field :email, :string
     field :password_hash, :string, redact: true
     field :password, :string, virtual: true, redact: true
-    field :phone, :string, virtual: true
+    field :phone, :string
     field :username, :string
 
-    has_many :products, Pesapie.Accounts.Product
+    has_many :products, Pesapie.Products.Product
 
     timestamps(type: :utc_datetime)
   end
