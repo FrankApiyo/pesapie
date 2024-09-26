@@ -3,9 +3,8 @@ defmodule Pesapie.Products.ReviewImage do
   import Ecto.Changeset
 
   schema "reviewimages" do
-
-    field :reviewId, :id
-    field :imageLink, :id
+    belongs_to :review, Pesapie.Products.Review
+    belongs_to :imagelink, Pesapie.Products.ImageLink
 
     timestamps(type: :utc_datetime)
   end
@@ -14,6 +13,6 @@ defmodule Pesapie.Products.ReviewImage do
   def changeset(review_image, attrs) do
     review_image
     |> cast(attrs, [])
-    |> validate_required([])
+    |> validate_required([:imagelink_id, :review_id])
   end
 end

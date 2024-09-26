@@ -1,5 +1,5 @@
 defmodule PesapieWeb.Resolvers.Accounts do
-  alias PesapieWeb.Accounts
+  alias Pesapie.Accounts
   alias PesapieWeb.Schema.ChangesetErrors
 
   defp sign_token_for_user(user) do

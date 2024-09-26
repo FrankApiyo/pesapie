@@ -10,6 +10,7 @@ defmodule Pesapie.Accounts.User do
     field :username, :string
 
     has_many :products, Pesapie.Products.Product
+    has_many :reviews, Pesapie.Products.Review
 
     timestamps(type: :utc_datetime)
   end

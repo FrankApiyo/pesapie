@@ -7,6 +7,7 @@ defmodule Pesapie.ProductsTest do
     alias Pesapie.Products.Category
 
     import Pesapie.ProductsFixtures
+    import Pesapie.AccountsFixtures
 
     @invalid_attrs %{categoryName: nil}
 
@@ -61,6 +62,7 @@ defmodule Pesapie.ProductsTest do
     alias Pesapie.Products.Product
 
     import Pesapie.ProductsFixtures
+    import Pesapie.AccountsFixtures
 
     @invalid_attrs %{description: nil, name: nil, price: nil, stockQuantity: nil}
 
@@ -82,7 +84,7 @@ defmodule Pesapie.ProductsTest do
         stockQuantity: 42
       }
 
-      assert {:ok, %Product{} = product} = Products.create_product(valid_attrs)
+      assert {:ok, %Product{} = product} = Products.create_product(user_fixture(), valid_attrs)
       assert product.description == "some description"
       assert product.name == "some name"
       assert product.price == 120.5
@@ -90,7 +92,11 @@ defmodule Pesapie.ProductsTest do
     end
 
     test "create_product/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Products.create_product(@invalid_attrs)
+      assert {:error, %Ecto.Changeset{}} =
+               Products.create_product(
+                 user_fixture(),
+                 @invalid_attrs
+               )
     end
 
     test "update_product/2 with valid data updates the product" do
@@ -204,11 +210,21 @@ defmodule Pesapie.ProductsTest do
     test "create_review_image/1 with valid data creates a review_image" do
       valid_attrs = %{}
 
-      assert {:ok, %ReviewImage{} = review_image} = Products.create_review_image(valid_attrs)
+      assert {:ok, %ReviewImage{} = review_image} =
+               Products.create_review_image(
+                 review_fixture(),
+                 image_link_fixture(),
+                 valid_attrs
+               )
     end
 
     test "create_review_image/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Products.create_review_image(@invalid_attrs)
+      assert {:error, %Ecto.Changeset{}} =
+               Products.create_review_image(
+                 review_fixture(),
+                 image_link_fixture(),
+                 @invalid_attrs
+               )
     end
 
     test "update_review_image/2 with valid data updates the review_image" do
@@ -243,7 +259,7 @@ defmodule Pesapie.ProductsTest do
   alias Pesapie.Account
 
   describe "imagelinks" do
-    alias Pesapie.Product.ImageLink
+    alias Pesapie.Products.ImageLink
 
     import Pesapie.AccountsFixtures
     import Pesapie.ProductsFixtures
@@ -319,11 +335,21 @@ defmodule Pesapie.ProductsTest do
     test "create_product_image/1 with valid data creates a product_image" do
       valid_attrs = %{}
 
-      assert {:ok, %ProductImage{} = product_image} = Products.create_product_image(valid_attrs)
+      assert {:ok, %ProductImage{} = product_image} =
+               Products.create_product_image(
+                 product_fixture(),
+                 image_link_fixture(),
+                 valid_attrs
+               )
     end
 
     test "create_product_image/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Products.create_product_image(@invalid_attrs)
+      assert {:error, %Ecto.Changeset{}} =
+               Products.create_product_image(
+                 product_fixture(),
+                 image_link_fixture(),
+                 @invalid_attrs
+               )
     end
 
     test "update_product_image/2 with valid data updates the product_image" do

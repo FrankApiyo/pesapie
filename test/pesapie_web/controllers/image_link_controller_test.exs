@@ -1,10 +1,9 @@
 defmodule PesapieWeb.ImageLinkControllerTest do
   use PesapieWeb.ConnCase
 
-  import Pesapie.AccountsFixtures
   import Pesapie.ProductsFixtures
 
-  alias Pesapie.Product.ImageLink
+  alias Pesapie.Products.ImageLink
 
   @create_attrs %{
     linkURL: "some linkURL"
@@ -47,7 +46,10 @@ defmodule PesapieWeb.ImageLinkControllerTest do
   describe "update image_link" do
     setup [:create_image_link]
 
-    test "renders image_link when data is valid", %{conn: conn, image_link: %ImageLink{id: id} = image_link} do
+    test "renders image_link when data is valid", %{
+      conn: conn,
+      image_link: %ImageLink{id: id} = image_link
+    } do
       conn = put(conn, ~p"/api/imagelinks/#{image_link}", image_link: @update_attrs)
       assert %{"id" => ^id} = json_response(conn, 200)["data"]
 

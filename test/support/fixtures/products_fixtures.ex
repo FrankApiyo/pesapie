@@ -3,6 +3,7 @@ defmodule Pesapie.ProductsFixtures do
   This module defines test helpers for creating
   entities via the `Pesapie.Products` context.
   """
+  alias Pesapie.AccountsFixtures
 
   @doc """
   Generate a category.
@@ -23,14 +24,15 @@ defmodule Pesapie.ProductsFixtures do
   """
   def product_fixture(attrs \\ %{}) do
     {:ok, product} =
-      attrs
-      |> Enum.into(%{
-        description: "some description",
-        name: "some name",
-        price: 120.5,
-        stockQuantity: 42
-      })
-      |> Pesapie.Products.create_product()
+      Pesapie.Products.create_product(
+        AccountsFixtures.user_fixture(),
+        Enum.into(attrs, %{
+          description: "some description",
+          name: "some name",
+          price: 120.5,
+          stockQuantity: 42
+        })
+      )
 
     product
   end
@@ -55,9 +57,11 @@ defmodule Pesapie.ProductsFixtures do
   """
   def review_image_fixture(attrs \\ %{}) do
     {:ok, review_image} =
-      attrs
-      |> Enum.into(%{})
-      |> Pesapie.Products.create_review_image()
+      Pesapie.Products.create_review_image(
+        review_fixture(),
+        image_link_fixture(),
+        Enum.into(attrs, %{})
+      )
 
     review_image
   end
@@ -81,11 +85,11 @@ defmodule Pesapie.ProductsFixtures do
   """
   def product_image_fixture(attrs \\ %{}) do
     {:ok, product_image} =
-      attrs
-      |> Enum.into(%{
-
-      })
-      |> Pesapie.Products.create_product_image()
+      Pesapie.Products.create_product_image(
+        product_fixture(),
+        image_link_fixture(),
+        Enum.into(attrs, %{})
+      )
 
     product_image
   end

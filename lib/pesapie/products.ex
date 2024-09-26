@@ -138,15 +138,17 @@ defmodule Pesapie.Products do
 
   ## Examples
 
-      iex> create_product(%{field: value})
+      iex> user = %User{id: 1}
+      iex> create_product(user, %{field: value})
       {:ok, %Product{}}
 
-      iex> create_product(%{field: bad_value})
+      iex> create_product(user, %{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_product(attrs \\ %{}) do
-    %Product{}
+  def create_product(user, attrs \\ %{}) do
+    user
+    |> Ecto.build_assoc(:products)
     |> Product.changeset(attrs)
     |> Repo.insert()
   end
@@ -330,15 +332,16 @@ defmodule Pesapie.Products do
 
   ## Examples
 
-      iex> create_review_image(%{field: value})
+      iex> create_review_image(review, image_link, %{field: value})
       {:ok, %ReviewImage{}}
 
-      iex> create_review_image(%{field: bad_value})
+      iex> create_review_image(review, image_link, %{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_review_image(attrs \\ %{}) do
-    %ReviewImage{}
+  def create_review_image(review, image_link, attrs \\ %{}) do
+    review
+    |> Ecto.build_assoc(:reviewimages, imagelink_id: image_link.id)
     |> ReviewImage.changeset(attrs)
     |> Repo.insert()
   end
@@ -390,7 +393,7 @@ defmodule Pesapie.Products do
     ReviewImage.changeset(review_image, attrs)
   end
 
-  alias Pesapie.Product.ImageLink
+  alias Pesapie.Products.ImageLink
 
   @doc """
   Returns the list of imagelinks.
@@ -522,15 +525,16 @@ defmodule Pesapie.Products do
 
   ## Examples
 
-      iex> create_product_image(%{field: value})
+      iex> create_product_image(product, image_link, %{field: value})
       {:ok, %ProductImage{}}
 
-      iex> create_product_image(%{field: bad_value})
+      iex> create_product_image(product, image_link, %{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_product_image(attrs \\ %{}) do
-    %ProductImage{}
+  def create_product_image(product, image_link, attrs \\ %{}) do
+    product
+    |> Ecto.build_assoc(:productimages, imagelink_id: image_link.id)
     |> ProductImage.changeset(attrs)
     |> Repo.insert()
   end

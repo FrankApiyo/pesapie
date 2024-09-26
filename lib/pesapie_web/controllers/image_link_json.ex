@@ -1,5 +1,5 @@
 defmodule PesapieWeb.ImageLinkJSON do
-  alias Pesapie.Product.ImageLink
+  alias Pesapie.Products.ImageLink
 
   @doc """
   Renders a list of imagelinks.

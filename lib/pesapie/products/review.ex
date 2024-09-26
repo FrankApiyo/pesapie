@@ -5,9 +5,9 @@ defmodule Pesapie.Products.Review do
   schema "reviews" do
     field :comment, :string
     field :rating, :integer
-    field :userId, :id
-    field :productId, :id
-    field :imagelinks, :id
+    belongs_to :user, Pesapie.Accounts.User
+    belongs_to :product, Pesapie.Products.Product
+    has_many :reviewimages, Pesapie.Products.ReviewImage
 
     timestamps(type: :utc_datetime)
   end

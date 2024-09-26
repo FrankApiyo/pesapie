@@ -2,7 +2,7 @@ defmodule PesapieWeb.ImageLinkController do
   use PesapieWeb, :controller
 
   alias Pesapie.Products
-  alias Pesapie.Product.ImageLink
+  alias Pesapie.Products.ImageLink
 
   action_fallback PesapieWeb.FallbackController
 
