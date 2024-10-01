@@ -1,5 +1,6 @@
 defmodule PesapieWeb.Resolvers.Product do
   alias Pesapie.Products
+  alias PesapieWeb.Schema.ChangesetErrors
 
   def list_products(_parent, _args, _resolution) do
     {:ok, Products.list_products()}
