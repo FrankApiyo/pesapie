@@ -127,4 +127,8 @@ defmodule Pesapie.Accounts do
       _ -> :error
     end
   end
+
+  def data(), do: Dataloader.Ecto.new(Repo, query: &query/2)
+
+  def query(queryable, _params), do: queryable
 end

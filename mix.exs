@@ -50,7 +50,7 @@ defmodule Pesapie.MixProject do
       {:absinthe_phoenix, "~> 2.0.2"},
       {:pbkdf2_elixir, "~> 1.0"},
       {:cors_plug, "~> 3.0"},
-      {:dataloader, "~> 1.0.6"}
+      {:dataloader, "~> 1.0.11"}
     ]
   end
 

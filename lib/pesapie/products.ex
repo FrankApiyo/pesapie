@@ -585,4 +585,8 @@ defmodule Pesapie.Products do
   def change_product_image(%ProductImage{} = product_image, attrs \\ %{}) do
     ProductImage.changeset(product_image, attrs)
   end
+
+  def data(), do: Dataloader.Ecto.new(Repo, query: &query/2)
+
+  def query(queryable, _params), do: queryable
 end

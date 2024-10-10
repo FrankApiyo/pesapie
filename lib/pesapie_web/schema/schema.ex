@@ -1,5 +1,7 @@
 defmodule PesapieWeb.Schema.Schema do
   use Absinthe.Schema
+  alias Pesapie.Products
+  alias Pesapie.Accounts
   import_types(PesapieWeb.Schema.ProductTypes)
   import_types(PesapieWeb.Schema.UserTypes)
 
@@ -48,5 +50,19 @@ defmodule PesapieWeb.Schema.Schema do
       arg(:password, non_null(:string))
       resolve(&PesapieWeb.Resolvers.Accounts.signin/3)
     end
+  end
+
+  # Add dataloader to the context
+  def context(ctx) do
+    loader =
+      Dataloader.new()
+      |> Dataloader.add_source(Products, Products.data())
+      |> Dataloader.add_source(Accounts, Accounts.data())
+
+    Map.put(ctx, :loader, loader)
+  end
+
+  def plugins do
+    [Absinthe.Middleware.Dataloader] ++ Absinthe.Plugin.defaults()
   end
 end

@@ -2,6 +2,8 @@ defmodule Pesapie.Products.Product do
   use Ecto.Schema
   import Ecto.Changeset
 
+  # TODO: include ID in schemas?
+  # TODO: check for any errors in the other files
   schema "products" do
     field :description, :string
     field :name, :string
