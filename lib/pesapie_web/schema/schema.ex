@@ -2,6 +2,8 @@ defmodule PesapieWeb.Schema.Schema do
   use Absinthe.Schema
   alias Pesapie.Products
   alias Pesapie.Accounts
+
+  alias PesapieWeb.Schema.Middleware
   import_types(PesapieWeb.Schema.ProductTypes)
   import_types(PesapieWeb.Schema.UserTypes)
 
