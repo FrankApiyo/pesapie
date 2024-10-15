@@ -20,7 +20,7 @@ defmodule PesapieWeb.Plugs.SetCurrentUser do
   end
 
   def build_context(conn) do
-    with ["Bearer" <> token] <- get_req_header(conn, "authorization"),
+    with ["Bearer " <> token] <- get_req_header(conn, "authorization"),
          {:ok, %{id: id}} <- PesapieWeb.AuthToken.verify(token),
          %{} = user <- Pesapie.Accounts.get_user(id) do
       %{current_user: user}
