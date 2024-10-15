@@ -2,14 +2,12 @@ defmodule Pesapie.Products.Product do
   use Ecto.Schema
   import Ecto.Changeset
 
-  # TODO: include ID in schemas?
-  # TODO: check for any errors in the other files
   schema "products" do
     field :description, :string
     field :name, :string
     field :price, :float
-    field :stockQuantity, :integer
-    field :categoryId, :id
+    field :stock_quantity, :integer
+    field :category_id, :id
 
     belongs_to :user, Pesapie.Accounts.User
     has_many :productimages, Pesapie.Products.ProductImage
@@ -21,7 +19,7 @@ defmodule Pesapie.Products.Product do
   @doc false
   def changeset(product, attrs) do
     product
-    |> cast(attrs, [:name, :description, :price, :stockQuantity])
-    |> validate_required([:name, :description, :price, :stockQuantity])
+    |> cast(attrs, [:name, :description, :price, :stock_quantity])
+    |> validate_required([:name, :description, :price, :stock_quantity])
   end
 end
