@@ -118,9 +118,7 @@ defmodule Pesapie.Accounts do
   and the password is valid. Otherwise, :error is returned.
   """
   def authenticate(username, password) do
-    user = Repo.get_by!(User, username: username)
-
-    with %{password_hash: password_hash} <- user,
+    with %User{password_hash: password_hash} = user <- Repo.get_by(User, username: username),
          true <- Pbkdf2.verify_pass(password, password_hash) do
       {:ok, user}
     else
