@@ -134,6 +134,22 @@ defmodule Pesapie.Products do
   def get_product!(id), do: Repo.get!(Product, id)
 
   @doc """
+  Gets a single product given id
+
+  Return nil if the Product does not exist.
+
+  ## Examples
+
+      iex> get_product(123)
+      %Product{}
+
+      iex> get_product(456)
+      nil
+
+  """
+  def get_product(id), do: Repo.get(Product, id)
+
+  @doc """
   Creates a product.
 
   ## Examples
@@ -235,16 +251,18 @@ defmodule Pesapie.Products do
   Creates a review.
 
   ## Examples
-
-      iex> create_review(%{field: value})
+      iex> user = %User{id: 1}
+      iex> product = %Product{id: 1}
+      iex> create_review(user, product, %{comment: "comment", rating: 5})
       {:ok, %Review{}}
 
-      iex> create_review(%{field: bad_value})
+      iex> create_review(user, product, %{comment: 1})
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_review(attrs \\ %{}) do
-    %Review{}
+  def create_review(user, product, attrs \\ %{}) do
+    user
+    |> Ecto.build_assoc(:reviews, product_id: product.id)
     |> Review.changeset(attrs)
     |> Repo.insert()
   end

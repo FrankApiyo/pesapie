@@ -25,4 +25,21 @@ defmodule PesapieWeb.Resolvers.Product do
         {:ok, product}
     end
   end
+
+  def create_review(_, %{product_id: product_id} = args, %{context: %{current_user: user}}) do
+    case product = Products.get_product(product_id) do
+      %Products.Product{} ->
+        case Products.create_review(user, product, args) do
+          {:error, changeset} ->
+            {:error,
+             message: "Could not create review", details: ChangesetErrors.error_details(changeset)}
+
+          {:ok, review} ->
+            {:ok, review}
+        end
+
+      _ ->
+        {:error, message: "The product you are reveiwing couldn't be found"}
+    end
+  end
 end

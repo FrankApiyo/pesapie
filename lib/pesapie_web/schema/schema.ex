@@ -26,6 +26,15 @@ defmodule PesapieWeb.Schema.Schema do
   end
 
   mutation do
+    @desc "Create a review"
+    field :create_review, :review do
+      arg(:comment, :string)
+      arg(:rating, :integer)
+      arg(:product_id, :integer)
+      middleware(Middleware.Authenticate)
+      resolve(&PesapieWeb.Resolvers.Product.create_review/3)
+    end
+
     @desc "Create a product"
     field :create_product, :product do
       arg(:description, :string)

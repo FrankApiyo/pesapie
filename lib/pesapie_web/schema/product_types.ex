@@ -4,7 +4,6 @@ defmodule PesapieWeb.Schema.ProductTypes do
   import Absinthe.Resolution.Helpers, only: [dataloader: 1]
 
   object :review do
-    field :id, :id
     field :comment, :string
     field :rating, :integer
     field :inserted_at, :naive_datetime
