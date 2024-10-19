@@ -29,7 +29,6 @@ defmodule PesapieWeb.Schema.ProductTypes do
     field :name, :string
     field :price, :float
     field :category_id, :id
-    field :owner, :id
     field(:reviews, list_of(:review), resolve: dataloader(Pesapie.Products))
     # field(:productimages, list_of(:product_image), resolve: dataloader(Pesapie.Products))
 
