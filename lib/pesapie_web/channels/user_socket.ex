@@ -1,6 +1,7 @@
 defmodule PesapieWeb.UserSocket do
   use Phoenix.Socket
   use Absinthe.Phoenix.Socket, schema: PesapieWeb.Schema.Schema
+  alias PesapieWeb.Schema.Schema
 
   ## Channels
   # channel "room:*", PesapieWeb.RoomChannel
@@ -16,8 +17,21 @@ defmodule PesapieWeb.UserSocket do
   #
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
-  def connect(_params, socket, _connect_info) do
+  def connect(params, socket, _connect_info) do
+    current_user = current_user(params)
+
+    socket =
+      Absinthe.Phoenix.Socket.put_options(socket,
+        context: %{
+          current_user: current_user
+        }
+      )
+
     {:ok, socket}
+  end
+
+  defp current_user(%{"Authorization" => authorization}) do
+    Schema.get_user_from_authorization_header_value(authorization)
   end
 
   # Socket id's are topics that allow you to identify all sockets for a given user:

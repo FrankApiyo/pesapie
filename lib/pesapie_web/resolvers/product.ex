@@ -35,6 +35,10 @@ defmodule PesapieWeb.Resolvers.Product do
              message: "Could not create review", details: ChangesetErrors.error_details(changeset)}
 
           {:ok, review} ->
+            Absinthe.Subscription.publish(PesapieWeb.Endpoint, review,
+              review_added: review.product_id
+            )
+
             {:ok, review}
         end
 

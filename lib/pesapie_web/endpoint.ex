@@ -1,5 +1,6 @@
 defmodule PesapieWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :pesapie
+  use Absinthe.Phoenix.Endpoint
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
@@ -10,6 +11,10 @@ defmodule PesapieWeb.Endpoint do
     signing_salt: "rOb6VNsg",
     same_site: "Lax"
   ]
+
+  socket "/socket", PesapieWeb.UserSocket,
+    websocket: true,
+    longpoll: false
 
   socket "/live", Phoenix.LiveView.Socket,
     websocket: [connect_info: [session: @session_options]],

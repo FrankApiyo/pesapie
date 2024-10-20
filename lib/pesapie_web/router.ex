@@ -14,7 +14,11 @@ defmodule PesapieWeb.Router do
       analyze_complexity: true,
       max_complexity: 50
 
-    forward "/graphiql", Absinthe.Plug.GraphiQL, schema: PesapieWeb.Schema.Schema
+    forward "/graphiql",
+            Absinthe.Plug.GraphiQL,
+            schema: PesapieWeb.Schema.Schema,
+            socket: PesapieWeb.UserSocket
+
     # socket: PesapieWeb.UserSocket
   end
 

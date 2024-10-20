@@ -17,7 +17,8 @@ defmodule Pesapie.Application do
       # Start a worker by calling: Pesapie.Worker.start_link(arg)
       # {Pesapie.Worker, arg},
       # Start to serve requests, typically the last entry
-      PesapieWeb.Endpoint
+      PesapieWeb.Endpoint,
+      {Absinthe.Subscription, PesapieWeb.Endpoint}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

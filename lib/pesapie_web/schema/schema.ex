@@ -63,6 +63,34 @@ defmodule PesapieWeb.Schema.Schema do
     end
   end
 
+  subscription do
+    field :review_added, :review do
+      arg(:product_id, non_null(:id))
+
+      # The topic function is used to determine what topic the subscription
+      # cares about based on it's arguments.
+      config(fn args, _ ->
+        IO.inspect("hapa??")
+        IO.inspect(args.product_id)
+        {:ok, topic: args.product_id}
+      end)
+
+      # Run any subscription with this field every time the :create_review mutation happens
+      trigger(:create_review,
+        topic: fn review ->
+          IO.inspect("pale?")
+          IO.inspect(review.product_id)
+          review.product_id
+        end
+      )
+
+      resolve(fn review, _, _ ->
+        # The subscription resolvers receive whatever value triggers the subscription
+        {:ok, review}
+      end)
+    end
+  end
+
   # Add dataloader to the context
   def context(ctx) do
     loader =
@@ -75,5 +103,15 @@ defmodule PesapieWeb.Schema.Schema do
 
   def plugins do
     [Absinthe.Middleware.Dataloader] ++ Absinthe.Plugin.defaults()
+  end
+
+  def get_user_from_authorization_header_value(authorization_header_value) do
+    with ["Bearer " <> token] <- authorization_header_value,
+         {:ok, %{id: id}} <- PesapieWeb.AuthToken.verify(token),
+         %{} = user <- Pesapie.Accounts.get_user(id) do
+      %{current_user: user}
+    else
+      _ -> %{}
+    end
   end
 end
