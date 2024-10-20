@@ -9,7 +9,10 @@ defmodule PesapieWeb.Router do
   scope "/" do
     pipe_through :api
 
-    forward "/api", Absinthe.Plug, schema: PesapieWeb.Schema.Schema
+    forward "/api", Absinthe.Plug,
+      schema: PesapieWeb.Schema.Schema,
+      analyze_complexity: true,
+      max_complexity: 50
 
     forward "/graphiql", Absinthe.Plug.GraphiQL, schema: PesapieWeb.Schema.Schema
     # socket: PesapieWeb.UserSocket
