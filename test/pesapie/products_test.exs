@@ -64,7 +64,7 @@ defmodule Pesapie.ProductsTest do
     import Pesapie.ProductsFixtures
     import Pesapie.AccountsFixtures
 
-    @invalid_attrs %{description: nil, name: nil, price: nil, stockQuantity: nil}
+    @invalid_attrs %{description: nil, name: nil, price: nil, stock_quantity: nil}
 
     test "list_products/0 returns all products" do
       product = product_fixture()
@@ -81,14 +81,14 @@ defmodule Pesapie.ProductsTest do
         description: "some description",
         name: "some name",
         price: 120.5,
-        stockQuantity: 42
+        stock_quantity: 42
       }
 
       assert {:ok, %Product{} = product} = Products.create_product(user_fixture(), valid_attrs)
       assert product.description == "some description"
       assert product.name == "some name"
       assert product.price == 120.5
-      assert product.stockQuantity == 42
+      assert product.stock_quantity == 42
     end
 
     test "create_product/1 with invalid data returns error changeset" do
@@ -106,14 +106,14 @@ defmodule Pesapie.ProductsTest do
         description: "some updated description",
         name: "some updated name",
         price: 456.7,
-        stockQuantity: 43
+        stock_quantity: 43
       }
 
       assert {:ok, %Product{} = product} = Products.update_product(product, update_attrs)
       assert product.description == "some updated description"
       assert product.name == "some updated name"
       assert product.price == 456.7
-      assert product.stockQuantity == 43
+      assert product.stock_quantity == 43
     end
 
     test "update_product/2 with invalid data returns error changeset" do
@@ -138,6 +138,7 @@ defmodule Pesapie.ProductsTest do
     alias Pesapie.Products.Review
 
     import Pesapie.ProductsFixtures
+    import Pesapie.AccountsFixtures
 
     @invalid_attrs %{comment: nil, rating: nil}
 
@@ -154,13 +155,20 @@ defmodule Pesapie.ProductsTest do
     test "create_review/1 with valid data creates a review" do
       valid_attrs = %{comment: "some comment", rating: 42}
 
-      assert {:ok, %Review{} = review} = Products.create_review(valid_attrs)
+      assert {:ok, %Review{} = review} =
+               Products.create_review(
+                 user_fixture(),
+                 product_fixture(),
+                 valid_attrs
+               )
+
       assert review.comment == "some comment"
       assert review.rating == 42
     end
 
     test "create_review/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Products.create_review(@invalid_attrs)
+      assert {:error, %Ecto.Changeset{}} =
+               Products.create_review(user_fixture(), product_fixture(), @invalid_attrs)
     end
 
     test "update_review/2 with valid data updates the review" do
@@ -210,7 +218,7 @@ defmodule Pesapie.ProductsTest do
     test "create_review_image/1 with valid data creates a review_image" do
       valid_attrs = %{}
 
-      assert {:ok, %ReviewImage{} = review_image} =
+      assert {:ok, %ReviewImage{} = _review_image} =
                Products.create_review_image(
                  review_fixture(),
                  image_link_fixture(),

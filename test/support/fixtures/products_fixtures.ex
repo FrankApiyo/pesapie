@@ -30,7 +30,7 @@ defmodule Pesapie.ProductsFixtures do
           description: "some description",
           name: "some name",
           price: 120.5,
-          stockQuantity: 42
+          stock_quantity: 42
         })
       )
 
@@ -42,12 +42,15 @@ defmodule Pesapie.ProductsFixtures do
   """
   def review_fixture(attrs \\ %{}) do
     {:ok, review} =
-      attrs
-      |> Enum.into(%{
-        comment: "some comment",
-        rating: 42
-      })
-      |> Pesapie.Products.create_review()
+      Pesapie.Products.create_review(
+        AccountsFixtures.user_fixture(%{username: "Alice"}),
+        product_fixture(),
+        attrs
+        |> Enum.into(%{
+          comment: "some comment",
+          rating: 42
+        })
+      )
 
     review
   end
