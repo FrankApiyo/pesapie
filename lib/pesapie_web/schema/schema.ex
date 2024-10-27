@@ -6,6 +6,7 @@ defmodule PesapieWeb.Schema.Schema do
   alias PesapieWeb.Schema.Middleware
   import_types(PesapieWeb.Schema.ProductTypes)
   import_types(PesapieWeb.Schema.UserTypes)
+  import_types(Absinthe.Plug.Types)
 
   query do
     @desc "Get a product by its id"
@@ -26,6 +27,16 @@ defmodule PesapieWeb.Schema.Schema do
   end
 
   mutation do
+    @desc "Upload an image"
+    field :upload_file, :string do
+      arg(:image_file, non_null(:upload))
+
+      resolve(fn args, _ ->
+        IO.inspect(args.image_file)
+        {:ok, "success"}
+      end)
+    end
+
     @desc "Create a review"
     field :create_review, :review do
       arg(:comment, :string)

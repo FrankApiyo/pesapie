@@ -15,6 +15,15 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 docker compose up -d
 ```
 ## TOD0:
- - Implement client side image uploads
  - Fix failing tests
+ - Upload files to S3 using https://github.com/aws-beam/aws-elixir
 
+
+## How to upload files
+
+```console
+curl -X POST \
+-F 'query=mutation { uploadFile(imageFile: "car_photo")}' \
+-F car_photo=@car.jpeg \
+http://localhost:4000/graphiql
+```
